@@ -23,45 +23,45 @@ app.use("/peerjs", peerServer);
 
 
 
-// AUTHENTICATION CONFIG-----------
-var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
-var expressSession = require("express-session");
-var passport = require("passport");
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-const LocalStrategy = require("passport-local").Strategy;
+// // AUTHENTICATION CONFIG-----------
+// var mongoose = require("mongoose");
+// var passportLocalMongoose = require("passport-local-mongoose");
+// var expressSession = require("express-session");
+// var passport = require("passport");
+// var bodyParser = require("body-parser");
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+// const LocalStrategy = require("passport-local").Strategy;
 
-mongoose.connect("mongodb://127.0.0.1:27017/videochatapp").then(function () {
-  console.log("conectedddddd.........!");
-});
+// mongoose.connect("mongodb://127.0.0.1:27017/videochatapp").then(function () {
+//   console.log("conectedddddd.........!");
+// });
 
-var userModel = mongoose.Schema({
-  username: String,
-  email: String,
-  password: String,
-});
+// var userModel = mongoose.Schema({
+//   username: String,
+//   email: String,
+//   password: String,
+// });
 
-userModel.plugin(passportLocalMongoose);
-
-
-var Users = mongoose.model("user", userModel);
-
-passport.use(new LocalStrategy(Users.authenticate()));
+// userModel.plugin(passportLocalMongoose);
 
 
-app.use(
-  expressSession({
-    resave: false,
-    saveUninitialized: false,
-    secret: "lolo",
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser(Users.serializeUser());
-passport.deserializeUser(Users.deserializeUser());
+// var Users = mongoose.model("user", userModel);
+
+// passport.use(new LocalStrategy(Users.authenticate()));
+
+
+// app.use(
+//   expressSession({
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: "lolo",
+//   })
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.serializeUser(Users.serializeUser());
+// passport.deserializeUser(Users.deserializeUser());
 
 
 // app.get("/", (req, res) => {
